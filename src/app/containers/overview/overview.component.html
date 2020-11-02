@@ -1,0 +1,16 @@
+<div class="chart">
+  <mat-spinner *ngIf="dailyPostsLoading | async"></mat-spinner>
+  <ngx-charts-line-chart
+    *ngIf="!(dailyPostsLoading | async)"
+    [autoScale]="true"
+    [gradient]="true"
+    [legend]="false"
+    [results]="dailyPostsResults"
+    [roundDomains]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    yAxisLabel="Number of Posts">
+  </ngx-charts-line-chart>
+</div>

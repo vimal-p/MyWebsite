@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://demo.zhaidongxi.com/yii2-app-example-backend-api",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

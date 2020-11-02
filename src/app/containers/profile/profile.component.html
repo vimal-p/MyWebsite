@@ -1,0 +1,96 @@
+<form [formGroup]="form" novalidate>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <mat-accordion fxFlex fxFlex.gt-md="60%">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Avatar
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayout.xs="column">
+          <div fxFlex="120px" fxFlex.xs>
+            <img class="avatar" [src]="avatarSrc || model.avatarURL">
+          </div>
+          <div fxFlex="24px" fxFlex.xs="10px"></div>
+          <div class="actions" fxFlex>
+            <input #avatarInput class="hidden" type="file" accept="image/png, image/jpeg" (change)="selectAvatar($event.target.files)">
+            <button mat-raised-button color="primary" (click)="avatarInput.click()">Select a photo</button>
+            <button mat-raised-button color="accent" (click)="updateAvatar()" [disabled]="!avatarFile || avatarInvalid || uploaded"
+              [matTooltip]="uploaded ? 'Avatar update successful' : avatarFile ? 'Click to update the avatar' : 'No file selected'"
+              matTooltipPosition="right">
+              {{uploaded ? 'Updated' : 'Update'}}
+            </button>
+            <div class="error-wrapper">
+              <mat-error>
+                <ng-template [ngIf]="avatarTooSmall">
+                  Avatar size cannot be less then 100B
+                </ng-template>
+                <ng-template [ngIf]="avatarTooLarge">
+                  Avatar size cannot be greater then 200KB
+                </ng-template>
+              </mat-error>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title fxFlex="0 1 20em">
+            Username
+          </mat-panel-title>
+          <mat-panel-description>
+            {{model.username}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayout.xs="column">
+          <div fxFlex>
+            <mat-form-field>
+              <input matInput autocomplete="nope" placeholder="Username" formControlName="username">
+            </mat-form-field>
+            <mat-error>
+              <ng-template [ngIf]="username.hasError('minlength') || username.hasError('maxlength')">
+                Username must be at between 2 and 20 characters long.
+              </ng-template>
+              <ng-template [ngIf]="username.hasError('message')">
+                {{username.getError('message')}}
+              </ng-template>
+            </mat-error>
+          </div>
+          <div fxFlex="24px" fxHide.xs></div>
+          <div fxFlex>
+            <button mat-raised-button color="primary" (click)="updateUsername()" [disabled]="!username.value || username.invalid">Update</button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title fxFlex="0 1 20em">
+            Email
+          </mat-panel-title>
+          <mat-panel-description>
+            {{model.email}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayout.xs="column">
+          <div fxFlex>
+            <mat-form-field>
+              <input matInput autocomplete="nope" placeholder="Email" formControlName="email">
+            </mat-form-field>
+            <mat-error>
+              <ng-template [ngIf]="email.hasError('email')">
+                Your email is invalid.
+              </ng-template>
+              <ng-template [ngIf]="email.hasError('message')">
+                {{email.getError('message')}}
+              </ng-template>
+            </mat-error>
+          </div>
+          <div fxFlex="24px" fxHide.xs></div>
+          <div fxFlex>
+            <button mat-raised-button color="primary" (click)="updateEmail()" [disabled]="!email.value || email.invalid">Update</button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</form>

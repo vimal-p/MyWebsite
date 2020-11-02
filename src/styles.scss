@@ -1,0 +1,45 @@
+@import 'app-theme';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+
+@include mat-core;
+@include angular-material-theme($app-theme);
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.error-wrapper {
+  font-size: 75%;
+  height: 1.25em;
+  margin-top: .5em;
+}
+
+.mat-list-item.active {
+  background-color: $black-6-opacity;
+}
+
+.mat-dialog-container {
+  min-width: 40vw;
+
+  .mat-form-field {
+    width: initial;
+  }
+}
+
+.actions {
+
+  .mat-button+.mat-button,
+  .mat-button+.mat-raised-button,
+  .mat-raised-button+.mat-button,
+  .mat-raised-button+.mat-raised-button {
+    margin-left: 8px;
+  }
+}
